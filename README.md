@@ -1,4 +1,4 @@
-# `WrappableText`
+# `wrappable-text`
 > Renderer-agnostic wrappable text following the Unicode Line Breaking Algorithm
 
 ## Installation
@@ -49,8 +49,32 @@ console.log(visuallyEmpty.isEmpty) // true
 
 const longLine = new WrappableText('Lorem ipsum…')
 const result = longLine.nowrap(80)
-// `result` will have the same structure than WrappablText.wrap return object,
+// `result` will have the same structure as WrappableText.wrap return object,
 // but with the `result.lines` array containing always only one line.
+```
+
+### Caching measures
+
+To keep it simple, `wrappable-text` does not cache string measures, and let this optimization at the discretion of the `measure` function:
+
+```js
+const cache = new Map()
+
+for (let fontSize = 10; fontSize < 100; fontSize += 10) {
+  const text = new WrappableText('…', {
+    measure: string => {
+      const K = fontSize + '_' + string
+      if (cache.has(K)) return cache.get(K)
+
+      const width = measure(string, fontSize)
+      cache.set(K, width)
+      return width
+    }
+  })
+
+  render(text, fontSize)
+}
+
 ```
 
 ## Development
