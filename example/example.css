@@ -1,0 +1,16 @@
+body {
+  background: #333;
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+main canvas {
+  margin: auto;
+  border: 1px dotted #4b96ff;
+  outline: var(--margin) solid white;
+  background: white;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
+}

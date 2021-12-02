@@ -1,0 +1,39 @@
+{
+  "name": "wrappable-text",
+  "version": "0.0.0",
+  "description": "Renderer-agnostic wrappable text following the Unicode Line Breaking Algorithm",
+  "main": "index.js",
+  "browser": "index.js",
+  "scripts": {
+    "example": "microbundle -i example/example.js -f umd -o example --target browser --external all",
+    "example:serve": "npm run example -- -w --compress false & light-server -s example -p 8080 -w example/**/*",
+    "example:deploy": "npm run example && ghp example -f",
+    "preversion": "npm run example && git add example",
+    "postversion": "git push && git push --tags && npm run example:deploy && npm publish"
+  },
+  "author": "Arnaud Juracek",
+  "license": "MIT",
+  "homepage": "https://github.com/arnaudjuracek/wrappable-text#readme",
+  "bugs": {
+    "url": "https://github.com/arnaudjuracek/wrappable-text/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:arnaudjuracek/wrappable-text.git"
+  },
+  "dependencies": {
+    "@craigmorton/linebreak": "^0.4.6"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "ghp": "^1.1.4",
+    "light-server": "^2.4.0",
+    "microbundle": "^0.12.2"
+  },
+  "private": false
+}
