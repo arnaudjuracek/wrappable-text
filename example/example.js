@@ -2,19 +2,6 @@ import WrappableText from '..'
 
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
-const fontSize = 100
-
-const text = new WrappableText(`Hello world&nbsp;! Jean-François.<br><br>Psycho&shy;logie`, {
-  br: /<br\/?>/,
-  nbsp: /&nbsp;/,
-  shy: /&shy;/,
-  measure: string => {
-    ctx.font = `${fontSize}px "Helvetica"`
-    return ctx.measureText(string).width
-  }
-})
-
-console.log(text)
 
 render()
 window.addEventListener('resize', () => requestAnimationFrame(render))
@@ -28,13 +15,25 @@ function render () {
   canvas.style.width = (canvas.width / dpi) + 'px'
   canvas.style.height = (canvas.height / dpi) + 'px'
 
+  const fontSize = (canvas.height / dpi) * 0.1
+
   ctx.font = `${fontSize}px "Helvetica"`
   ctx.strokeStyle = '#9a1fff'
   ctx.scale(dpi, dpi)
 
+  const text = new WrappableText(`Hello world&nbsp;! Jean-François.<br><br>Psycho&shy;logie`, {
+    br: /<br\/?>/,
+    nbsp: /&nbsp;/,
+    shy: /&shy;/,
+    measure: string => {
+      ctx.font = `${fontSize}px "Helvetica"`
+      return ctx.measureText(string).width
+    }
+  })
+
   // Wrap text to canvas width
   const { lines, overflow } = text.wrap(canvas.width / dpi)
-  console.log({ lines, overflow })
+  console.log(text, { lines, overflow })
 
   // Render lines
   ctx.fillStyle = overflow ? 'rgb(255, 75, 78)' : 'black'
