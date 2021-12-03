@@ -21,10 +21,11 @@ function render () {
   ctx.strokeStyle = '#9a1fff'
   ctx.scale(dpi, dpi)
 
-  const text = new WrappableText(`Hello world&nbsp;! Jean-François.<br><br>Psycho&shy;logie`, {
+  const text = new WrappableText(`Hello world&nbsp;! Jean-François.<br><br>Psycho&shy;logie<br>Wrappable&ZeroWidthSpace;Text`, {
     br: /<br\/?>/,
     nbsp: /&nbsp;/,
     shy: /&shy;/,
+    zwsp: /&ZeroWidthSpace;/,
     measure: string => {
       ctx.font = `${fontSize}px "Helvetica"`
       return ctx.measureText(string).width

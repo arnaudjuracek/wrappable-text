@@ -31,13 +31,14 @@ for (const line of lines) {
 
 ### Special characters
 
-There are three special characters for the line-breaking algorithm. `WrappableText` constructor accepts a `RegExp` or `string` to re-define each one:
+There are several special characters influencing the line-breaking algorithm. `WrappableText` constructor accepts a `RegExp` or `string` to re-define each one:
 
 ```js
 const text = new WrappableText('Lorem ipsum…', {
   br: /<br\/?>/,  // default: '\u000A'
   shy: '&shy;',   // default: '\u00AD'
   nbsp: '&nbsp;', // default: '\u00A0'
+  zwsp: /&(ZeroWidthSpace|#8203|#x200B|NegativeVeryThinSpace);/, // default: '\u200B'
 })
 ```
 

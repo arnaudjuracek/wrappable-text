@@ -3,6 +3,7 @@ import LineBreaker from '@craigmorton/linebreak'
 const BR = '\u000A'
 const NBSP = '\u00A0'
 const SHY = '\u00AD'
+const ZWSP = '\u200B'
 
 function monospace (string) { return string.length }
 function getBreaks (string) {
@@ -23,14 +24,15 @@ export default class WrappableText {
     measure = monospace,
     br = BR,
     nbsp = NBSP,
-    shy = SHY
+    shy = SHY,
+    zwsp = ZWSP
   } = {}) {
     this.measure = measure
-    this.entities = { br, nbsp, shy }
     this.value = value
-      .replace(new RegExp(this.entities.br, 'g'), BR)
-      .replace(new RegExp(this.entities.nbsp, 'g'), NBSP)
-      .replace(new RegExp(this.entities.shy, 'g'), SHY)
+      .replace(new RegExp(br, 'g'), BR)
+      .replace(new RegExp(nbsp, 'g'), NBSP)
+      .replace(new RegExp(shy, 'g'), SHY)
+      .replace(new RegExp(zwsp, 'g'), ZWSP)
   }
 
   get isEmpty () {
@@ -39,6 +41,7 @@ export default class WrappableText {
       .replace(new RegExp(BR, 'g'), '')
       .replace(new RegExp(NBSP, 'g'), '')
       .replace(new RegExp(SHY, 'g'), '')
+      .replace(new RegExp(ZWSP, 'g'), '')
   }
 
   wrap (width = Number.POSITIVE_INFINITY) {
@@ -100,6 +103,7 @@ export default class WrappableText {
       .replace(new RegExp(BR, 'g'), '')
       .replace(new RegExp(NBSP, 'g'), '')
       .replace(new RegExp(SHY, 'g'), '')
+      .replace(new RegExp(ZWSP, 'g'), '')
     const lineWidth = this.measure(value)
 
     // We use the same object structure as WrappableText.wrap() so that both
