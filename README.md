@@ -81,9 +81,10 @@ for (let fontSize = 10; fontSize < 100; fontSize += 10) {
 ## Development
 
 ```sh
-$ npm install             # install all npm dependencies
-$ npm run example:serve   # start the dev server with livereload on the example folder
-$ npm run example:deploy  # deploy your example folder on a gh-page branch
+$ npm install
+$ npm run start
+$ nodemon --exec ava
+$ npm run build
 $ npm version [major|minor|patch]
 ```
 
