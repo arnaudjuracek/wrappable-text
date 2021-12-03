@@ -42,11 +42,8 @@ export default class WrappableText {
   }
 
   wrap (width = Number.POSITIVE_INFINITY) {
-    if (!isFinite(width)) return this.nowrap()
-
-    const breaks = getBreaks(this.value)
-
     const lines = []
+    const breaks = getBreaks(this.value)
 
     let start = 0
     while (start < this.value.length) {
@@ -99,11 +96,16 @@ export default class WrappableText {
   }
 
   nowrap (width = Number.POSITIVE_INFINITY) {
-    const lineWidth = this.measure(this.value)
+    const value = this.value
+      .replace(new RegExp(BR, 'g'), '')
+      .replace(new RegExp(NBSP, 'g'), '')
+      .replace(new RegExp(SHY, 'g'), '')
+    const lineWidth = this.measure(value)
+
     // We use the same object structure as WrappableText.wrap() so that both
     // methods can be used interchangeably
     return {
-      lines: [{ value: this.value, width: lineWidth }],
+      lines: [{ value, width: lineWidth }],
       overflow: lineWidth > width
     }
   }
