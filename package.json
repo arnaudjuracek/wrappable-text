@@ -1,6 +1,6 @@
 {
   "name": "wrappable-text",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Renderer-agnostic wrappable text following the Unicode Line Breaking Algorithm",
   "main": "index.js",
   "browser": "index.js",
