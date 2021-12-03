@@ -1,5 +1,5 @@
 import test from 'ava'
-import WrappableText from './'
+import WrappableText from '.'
 
 const htmlEntities = {
   br: /<br\/?>/,
