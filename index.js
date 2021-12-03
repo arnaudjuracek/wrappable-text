@@ -35,6 +35,7 @@ export default class WrappableText {
 
   get isEmpty () {
     return !this.value
+      .replace(/\s/g, '')
       .replace(new RegExp(BR, 'g'), '')
       .replace(new RegExp(NBSP, 'g'), '')
       .replace(new RegExp(SHY, 'g'), '')
