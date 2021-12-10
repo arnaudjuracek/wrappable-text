@@ -706,6 +706,12 @@
 
 
           curr++;
+        } // Ensure all previous breaks have been consumed
+
+
+        for (var i in breaks) {
+          if (i > curr) continue;
+          if (breaks[i]) breaks[i].consumed = true;
         } // Get the line value
 
 

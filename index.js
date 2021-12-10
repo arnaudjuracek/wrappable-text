@@ -81,6 +81,12 @@ export default class WrappableText {
         curr++
       }
 
+      // Ensure all previous breaks have been consumed
+      for (const i in breaks) {
+        if (i > curr) continue
+        if (breaks[i]) breaks[i].consumed = true
+      }
+
       // Get the line value
       let value = this.value.substring(start, curr).trim()
 

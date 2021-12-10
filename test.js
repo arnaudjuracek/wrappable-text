@@ -26,7 +26,16 @@ test('WrappableText correctly handles empty text', t => {
   t.is(wt('hello').isEmpty, false)
 })
 
-test('WrappableText correctly wrap lines', t => {
+test('WrappableText correctly handles very long words', t => {
+  t.is(wt('one two averylongwordwhichcannotbreak').wrap().lines.length, 1)
+  t.is(wt('one two averylongwordwhichcannotbreak').wrap(10).lines.length, 2)
+  t.is(
+    wt('one two averylongwordwhichcannotbreak').wrap(10).lines.map(line => line.value).join('<br>'),
+    'one two<br>averylongwordwhichcannotbreak'
+  )
+})
+
+test('WrappableText correctly wraps lines', t => {
   t.is(wt('first second third').wrap().lines.length, 1)
   t.is(wt('first second third').wrap(19).lines.length, 1)
   t.is(wt('first second third').wrap(15).lines.length, 2)
@@ -35,7 +44,7 @@ test('WrappableText correctly wrap lines', t => {
   t.is(wt('first<br>second third').wrap().lines.length, 2)
 })
 
-test('WrappableText correctly nowrap lines', t => {
+test('WrappableText correctly nowraps lines', t => {
   t.is(wt('first second third').nowrap().lines.length, 1)
   t.is(wt('first second third').nowrap(1).lines.length, 1)
   t.is(wt('first<br>second third').nowrap().lines.length, 1)
@@ -63,7 +72,7 @@ test('WrappableText correctly handles zero-width space', t => {
   t.is(wt('psycho&ZeroWidthSpace;logie').nowrap().lines[0].value.includes('\u200B'), false)
 })
 
-test('WrappableText correctly detect overflows', t => {
+test('WrappableText correctly detects overflows', t => {
   t.is(wt('0123456789').wrap().overflow, false)
   t.is(wt('0123456789').nowrap().overflow, false)
   t.is(wt('0123456789').wrap(5).overflow, true)
