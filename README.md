@@ -42,6 +42,15 @@ const text = new WrappableText('Lorem ipsum…', {
 })
 ```
 
+#### Non-breaking hyphen
+Some situations may require hyphenated words to not break.
+In shuch cases, the [Unicode® Standard Annex #14](https://www.unicode.org/reports/tr14/#Hyphen) recommands the use of the non-breaking hyphen character `\U2011`:
+
+```js
+const text = new WrappableText(string.replace(/\u2010/g, '\u2011'))
+```
+
+
 ### Helpers
 
 ```js
